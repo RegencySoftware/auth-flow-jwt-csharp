@@ -18,7 +18,7 @@ namespace AuthFlowJWT
         static string _userName = "youruserid here";
         static string _password = "";
 
-        static string _secrete = "d0c012e405aa4a079d31e03047724550";
+        static string _secret = "d0c012e405aa4a079d31e03047724550";
         static string _audience = "65f2bace503f45f1be98a5e5dd7cefdd";
 
         static void Main(string[] args)
@@ -58,7 +58,7 @@ namespace AuthFlowJWT
         /// <returns></returns>
         private static void TestCreateJWT()
         {
-            var jwtSecurity = new AuthFlowJWT.Security.Auth.JSONWebTokens(_audience, _secrete);
+            var jwtSecurity = new AuthFlowJWT.Security.Auth.JSONWebTokens(_audience, _secret);
                      
             //1. Get a new JWT
             var jwtAuthServer = jwtSecurity.CreateJWT(_userName);

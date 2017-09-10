@@ -17,21 +17,21 @@ namespace AuthFlowJWT.Security.Auth
     public class JSONWebTokens
     {
         private string _issuer { get; set; }
-        private string _secrete { get; set; }
+        private string _secret { get; set; }
         private string _audience { get; set; }
 
         private int _tokenLifeMinutes { get; set; }
         private int _refreshTokenLifeMinutes { get; set; }
 
         /// <summary>
-        /// Pass the Secrete for JWT Encryption & Auidence key (GUID for vendor)
+        /// Pass the secret for JWT Encryption & Auidence key (GUID for vendor)
         /// </summary>
         /// <param name="audience">The Client</param>
-        /// <param name="secrete">The Secrete Key</param>
-        public JSONWebTokens (string audience, string secrete)
+        /// <param name="secret">The secret Key</param>
+        public JSONWebTokens (string audience, string secret)
         {
             _issuer = "mydomain.com";
-            _secrete = secrete;
+            _secret = secret;
             _audience = audience;
 
             //Set the lifetime of the JWT and Refresh Token
@@ -50,7 +50,7 @@ namespace AuthFlowJWT.Security.Auth
             authServerJWT.hasError = false;
             authServerJWT.errorMsg = string.Empty;
 
-            var secKey = new Microsoft.IdentityModel.Tokens.SymmetricSecurityKey(Encoding.Default.GetBytes(_secrete));
+            var secKey = new Microsoft.IdentityModel.Tokens.SymmetricSecurityKey(Encoding.Default.GetBytes(_secret));
             var signingCredentials = new Microsoft.IdentityModel.Tokens.SigningCredentials(
                 secKey,
                 SecurityAlgorithms.HmacSha256Signature);
@@ -119,13 +119,13 @@ namespace AuthFlowJWT.Security.Auth
         /// </summary>
         /// <param name="jwt">JWT</param>
         /// <param name="audience">The Client</param>
-        /// <param name="secrete">The Secrete Key</param>
+        /// <param name="secret">The secret Key</param>
         /// <returns></returns>
         public bool VerifyJWTSignature(string jwt)
         {
             bool valid = true;
 
-            var secKey = new Microsoft.IdentityModel.Tokens.SymmetricSecurityKey(Encoding.Default.GetBytes(_secrete));
+            var secKey = new Microsoft.IdentityModel.Tokens.SymmetricSecurityKey(Encoding.Default.GetBytes(_secret));
 
             var validationParameters = new TokenValidationParameters()
             {
@@ -185,7 +185,7 @@ namespace AuthFlowJWT.Security.Auth
         }
 
         /// <summary>
-        /// Convert Secrete to Bytes
+        /// Convert secret to Bytes
         /// </summary>
         /// <param name="str"></param>
         /// <returns></returns>

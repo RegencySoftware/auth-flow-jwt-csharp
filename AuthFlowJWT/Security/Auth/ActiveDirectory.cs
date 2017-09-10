@@ -64,9 +64,6 @@ namespace AuthFlowJWT.Security.Auth
         {
             groupName = groupName.ToLower();
           
-            //Handles UnderwriterWorkstationGroup (and others)
-            if (groupName.StartsWith("underwriter")) return true;
-
             //What CSC the user is in 
             if (groupName.Contains("team")) return true;
             if (groupName.Contains("staff")) return true;

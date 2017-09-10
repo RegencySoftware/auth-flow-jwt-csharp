@@ -64,9 +64,9 @@ namespace AuthFlowJWT.Security.Auth
         {
             groupName = groupName.ToLower();
           
-            //What CSC the user is in 
-            if (groupName.Contains("team")) return true;
-            if (groupName.Contains("staff")) return true;
+            //Limit to specific AD groups
+            if (groupName.Contains("TeamMI")) return true;
+            if (groupName.Contains("TeamCO")) return true;
 
             return false;
         }
